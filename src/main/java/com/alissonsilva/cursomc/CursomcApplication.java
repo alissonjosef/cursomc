@@ -8,13 +8,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.alissonsilva.cursomc.domain.Categoria;
+
 import com.alissonsilva.cursomc.repositories.CategoriaRepository;
 
+
 @SpringBootApplication
-public class CursomcApplication implements CommandLineRunner{
-	
+public class CursomcApplication implements CommandLineRunner {
+
 	@Autowired
 	private CategoriaRepository categoriaRepository;
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -22,12 +25,13 @@ public class CursomcApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		
+
 		Categoria cat1 = new Categoria(null, "Informatica");
 		Categoria cat2 = new Categoria(null, "Escritorio");
-		
+
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
-		
+	
+
 	}
 
 }
