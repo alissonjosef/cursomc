@@ -10,14 +10,15 @@ import java.util.Set;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.alissonsilva.cursomc.domain.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -33,11 +34,13 @@ public class Cliente implements Serializable {
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
-	@OneToMany(mappedBy = "cliente")
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.EAGER,mappedBy = "cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 	
 	@ElementCollection
-	@CollectionTable(name = "TELEFONE")
+	@JsonIgnore
+	@CollectionTable( name = "TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
 	public Cliente () {
